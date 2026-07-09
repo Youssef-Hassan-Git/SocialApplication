@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./lib/Redux/ReduxStore";
 import AuthRefresh from "./_AuthRefresher/AuthRefresh";
 import { Toaster } from 'react-hot-toast';
+import Footer from "./Components/Footer";
 
 config.autoAddCss = false;
 
@@ -44,6 +45,7 @@ export default function RootLayout({
           
             <Navbar />
             {children}
+            <Footer />
           </AuthRefresh>
         </Provider>
       </body>
