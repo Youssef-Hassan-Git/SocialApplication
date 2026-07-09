@@ -8,11 +8,13 @@ import {
   createComment,
   deletePost,
   getLikes,
+  getMyPosts,
   getPosts,
   likePost,
   sharePost,
 } from "../lib/Redux/PostsSlice";
 import toast from "react-hot-toast";
+
 import { getProfile } from "../lib/Redux/ProfileSlice";
 interface PostCardProps {
   postDetails: Posts;
@@ -53,6 +55,9 @@ export default function PostCard({ postDetails, showComments }: PostCardProps) {
     if (createComment.fulfilled.match(res)) {
       toast.success("Comment created successfully");
       dispatch(getPosts(30));
+      if (user?._id) {
+        dispatch(getMyPosts(user._id));
+      }
     } else {
       toast.error("Failed to create comment");
     }
@@ -66,6 +71,9 @@ export default function PostCard({ postDetails, showComments }: PostCardProps) {
 
     if (likePost.fulfilled.match(res)) {
       dispatch(getPosts(30));
+      if (user?._id) {
+        dispatch(getMyPosts(user._id));
+      }
       toast.success("Done");
     } else {
       toast.error((res.payload as string) || "Failed");
