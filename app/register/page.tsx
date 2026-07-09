@@ -1,7 +1,6 @@
 "use client";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { registerUser } from "../api/auth";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import ButtonLoader from "../Components/ButtonLoader";
