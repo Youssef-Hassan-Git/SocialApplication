@@ -1,18 +1,15 @@
 "use client";
-import type { Metadata } from "next";
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./Components/navbar/Navbar";
-// Font Awesome Configuration
+import Footer from "./Components/Footer";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Provider } from "react-redux";
 import { store } from "./lib/Redux/ReduxStore";
 import AuthRefresh from "./_AuthRefresher/AuthRefresh";
-import { Toaster } from 'react-hot-toast';
-import Footer from "./Components/Footer";
-
-config.autoAddCss = false;
+import { Toaster } from "react-hot-toast";
 
 config.autoAddCss = false;
 
@@ -36,16 +33,23 @@ export default function RootLayout({
       <head>
         <title>NextBoard</title>
       </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Provider store={store}>
-           <Toaster position="top-right" />
+          <Toaster position="top-right" />
+
           <AuthRefresh>
-          
-            <Navbar />
-            {children}
-            <Footer />
+            <div className="min-h-screen flex flex-col">
+              <Navbar />
+
+              <main className="flex-1">
+                {children}
+              </main>
+
+              <Footer />
+            </div>
           </AuthRefresh>
         </Provider>
       </body>

@@ -54,7 +54,7 @@ useEffect(() => {
 }, [user, dispatch]);
   return (
     <>
-      <div className="bg-white rounded-lg shadow-lg  p-4">
+      <div className="bg-white border-2 border-fuchsia-200 rounded-lg shadow-lg  p-4">
         <textarea
           placeholder={`What's on your mind?, ${name}`}
           className="w-full border border-gray-600 min-h-45 resize-none  rounded p-3 shadow-lg"

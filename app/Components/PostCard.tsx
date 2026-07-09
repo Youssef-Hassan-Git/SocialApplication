@@ -87,7 +87,7 @@ export default function PostCard({ postDetails, showComments }: PostCardProps) {
 
   return (
     /* Card Container */
-    <div className="md:max-w-7xl max-w-lg  mx-auto shadow-xl bg-white border border-gray-200 rounded-sm font-sans">
+    <div className="md:max-w-7xl max-w-lg  mx-auto shadow-xl bg-white border-2 border-fuchsia-200 rounded-sm font-sans">
       {/* 1. Header Row */}
       <div className="flex items-center justify-between p-4 pb-2">
         <div className="flex items-center space-x-3">
