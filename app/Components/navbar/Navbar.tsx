@@ -16,6 +16,8 @@ export default function Navbar() {
     dispatch(clearToken());
     router.replace("/login");
   };
+
+  const token = localStorage.getItem("userToken")
   return (
     <nav className="bg-blue-400  fixed w-full z-20 top-0 inset-s-0 border-b border-default">
       <div className="max-w-7xl  flex flex-wrap items-center justify-between mx-auto p-4">
@@ -103,7 +105,9 @@ export default function Navbar() {
               </Link>
             </li>
 
-            <li>
+           {!token && (
+            <>
+             <li>
               <Link
                 href="/login"
                 className={`block py-2 px-3 rounded-md duration-500 text-white hover:text-blue-400 hover:rounded-md hover:bg-white  ${
@@ -128,7 +132,11 @@ export default function Navbar() {
                 Register
               </Link>
             </li>
+            
+            </>
+           )}
 
+           {token && (<>
             <li>
               <span
                 onClick={() => logOut()}
@@ -137,6 +145,7 @@ export default function Navbar() {
                 LogOut
               </span>
             </li>
+           </>)}
           </ul>
         </div>
       </div>
