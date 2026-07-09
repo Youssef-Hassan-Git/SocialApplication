@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import logo from "../../assets/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearToken } from "@/app/lib/Redux/AuthSlice";
 export default function Navbar() {
@@ -17,7 +17,11 @@ export default function Navbar() {
     router.replace("/login");
   };
 
-  const token = localStorage.getItem("userToken")
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    setToken(localStorage.getItem("userToken"));
+  }, []);
   return (
     <nav className="bg-blue-400  fixed w-full z-20 top-0 inset-s-0 border-b border-default">
       <div className="max-w-7xl  flex flex-wrap items-center justify-between mx-auto p-4">
@@ -105,47 +109,48 @@ export default function Navbar() {
               </Link>
             </li>
 
-           {!token && (
-            <>
-             <li>
-              <Link
-                href="/login"
-                className={`block py-2 px-3 rounded-md duration-500 text-white hover:text-blue-400 hover:rounded-md hover:bg-white  ${
-                  pathname === "/login"
-                    ? "text-blue-400! bg-white  rounded-md"
-                    : "text-heading text-white hover:text-blue-400 hover:rounded-md hover:bg-white"
-                }`}
-              >
-                Login
-              </Link>
-            </li>
+            {!token && (
+              <>
+                <li>
+                  <Link
+                    href="/login"
+                    className={`block py-2 px-3 rounded-md duration-500 text-white hover:text-blue-400 hover:rounded-md hover:bg-white  ${
+                      pathname === "/login"
+                        ? "text-blue-400! bg-white  rounded-md"
+                        : "text-heading text-white hover:text-blue-400 hover:rounded-md hover:bg-white"
+                    }`}
+                  >
+                    Login
+                  </Link>
+                </li>
 
-            <li>
-              <Link
-                href="/register"
-                className={`block py-2 px-3 rounded-md duration-500  text-white hover:text-blue-400 hover:rounded-md hover:bg-white  ${
-                  pathname === "/register"
-                    ? "text-blue-400! bg-white  rounded-md"
-                    : "text-heading text-white hover:text-blue-400 hover:rounded-md hover:bg-white"
-                }`}
-              >
-                Register
-              </Link>
-            </li>
-            
-            </>
-           )}
+                <li>
+                  <Link
+                    href="/register"
+                    className={`block py-2 px-3 rounded-md duration-500  text-white hover:text-blue-400 hover:rounded-md hover:bg-white  ${
+                      pathname === "/register"
+                        ? "text-blue-400! bg-white  rounded-md"
+                        : "text-heading text-white hover:text-blue-400 hover:rounded-md hover:bg-white"
+                    }`}
+                  >
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
 
-           {token && (<>
-            <li>
-              <span
-                onClick={() => logOut()}
-                className="block py-2 px-3 cursor-pointer rounded-md duration-500  text-red-500 hover:text-red-600 hover:rounded-md hover:bg-white"
-              >
-                LogOut
-              </span>
-            </li>
-           </>)}
+            {token && (
+              <>
+                <li>
+                  <span
+                    onClick={() => logOut()}
+                    className="block py-2 px-3 cursor-pointer rounded-md duration-500  text-red-500 hover:text-red-600 hover:rounded-md hover:bg-white"
+                  >
+                    LogOut
+                  </span>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

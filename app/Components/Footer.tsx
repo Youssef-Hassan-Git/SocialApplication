@@ -9,7 +9,7 @@ import {
 export default function Footer() {
   
   return (
-<footer className="fixed bottom-0 left-0 w-full bg-blue-500 text-white py-2 px-4 z-50">
+<footer className="fixed bottom-0 left-0 w-full bg-blue-500 text-white py-2 px-4 z-50 rounded-md">
   <div className="max-w-7xl mx-auto flex items-center justify-between">
     <p className="text-xs">
       © {new Date().getFullYear()} NextBoard. All rights reserved.
