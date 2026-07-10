@@ -14,6 +14,7 @@ import { clearError, login } from "../lib/Redux/AuthSlice";
 import { RootState } from "../lib/Redux/ReduxStore";
 import { AppDispatch } from "../lib/Redux/ReduxStore";
 import { LoginFormValues } from "../_interfaces/LoginInterface";
+import Link from "next/link";
 
 export default function page() {
   const router = useRouter();
@@ -142,6 +143,11 @@ export default function page() {
           ) : (
             ""
           )}
+          <div className="mt-5 w-full flex justify-center ">
+            <Link className="text-blue-600  font-serif text-center  " href={"/register"}>
+          Don't have an acoount? Register now
+          </Link>
+          </div>
         </form>
       </div>
     </div>

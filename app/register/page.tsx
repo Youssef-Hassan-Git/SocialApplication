@@ -14,6 +14,7 @@ import { RootState } from "../lib/Redux/ReduxStore";
 import { AppDispatch } from "../lib/Redux/ReduxStore";
 import { register } from "../lib/Redux/AuthSlice";
 import { RegisterFormValues } from "../_interfaces/RegisterInterface";
+import Link from "next/link";
 
 export default function page() {
   const router = useRouter();
@@ -86,7 +87,7 @@ export default function page() {
   });
 
   return (
-    <div className="  pt-24 pb-8  border  bg-blue-50 ">
+    <div className="  pt-24 pb-16  border  bg-blue-50 ">
       <div className="min-h-screen flex justify-center items-center bg-blue-50">
         <div className="max-w-md w-full bg-white border-2 border-fuchsia-200 rounded-2xl shadow-xl p-8">
           {/* HEADER */}
@@ -125,7 +126,7 @@ export default function page() {
               onBlur={registerForm.handleBlur}
             />
             {registerForm.touched.email && registerForm.errors.email && (
-              <InputError Form={registerForm} field="email"  />
+              <InputError Form={registerForm} field="email" />
             )}
             <InputText
               label="Password"
@@ -138,7 +139,7 @@ export default function page() {
             />
 
             {registerForm.touched.password && registerForm.errors.password && (
-              <InputError Form={registerForm} field="password"  />
+              <InputError Form={registerForm} field="password" />
             )}
 
             <InputText
@@ -152,7 +153,7 @@ export default function page() {
             />
             {registerForm.touched.rePassword &&
               registerForm.errors.rePassword && (
-                <InputError Form={registerForm} field="rePassword"  />
+                <InputError Form={registerForm} field="rePassword" />
               )}
 
             <InputText
@@ -186,6 +187,14 @@ export default function page() {
             {isSuccess ? <RegisterMessage /> : ""}
 
             {errorMessage ? <ErrorMessageDisplay message={errorMessage} /> : ""}
+            <div className="mt-5 w-full flex justify-center ">
+              <Link
+                className="text-blue-600  font-serif text-center  "
+                href={"/login"}
+              >
+                Already have an account? Login now
+              </Link>
+            </div>
           </form>
         </div>
       </div>

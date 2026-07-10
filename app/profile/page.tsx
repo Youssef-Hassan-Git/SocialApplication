@@ -8,6 +8,7 @@ import Loading from "../loading";
 import { faMars, faVenus } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import ProtectedRoute from "../Components/ProtectedRoute";
+import Link from "next/link";
 export default function Page() {
   const dispatch = useDispatch<any>();
 
@@ -41,9 +42,9 @@ export default function Page() {
         {!user ? (
           <Loading />
         ) : (
-          <div className="pt-25  bg-blue-50 min-h-screen w-full  ">
+          <div className="pt-25  bg-blue-50 min-h-screen w-full   ">
             <div className="flex justify-center">
-              <div className="md:w-[75%] lg:w-[60%] mb-4 border-2 border-fuchsia-200  rounded-lg bg-white shadow-lg flex justify-center items-center md:items-start flex-col  ">
+              <div className="md:w-[75%] lg:w-[60%] mb-18 border-2  border-fuchsia-200  rounded-lg bg-white shadow-lg flex justify-center items-center md:items-start flex-col  ">
                 <img
                   src={user.photo}
                   alt="cover"
@@ -120,6 +121,9 @@ export default function Page() {
                   <div className="flex flex-col mt-5 justify-start">
                     <h1 className="text-2xl font-bold">{user.name}</h1>
                     <p className="text-gray-500">@{user.username}</p>
+                      <Link href="changepassword" className="mt-5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
+                      🔒 Change Password
+                    </Link>
                   </div>
                   {/* small */}
                   <div className="bg-blue-50 border border-blue-100 rounded p-3 mt-5 block md:hidden  text-center w-fit">

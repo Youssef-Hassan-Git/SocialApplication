@@ -30,6 +30,35 @@ export const login = createAsyncThunk(
   },
 );
 
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async (
+    payload: { password: string; newPassword: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const token = localStorage.getItem("userToken");
+
+      const response = await axios.patch(
+        `${BASE_URL}/users/change-password`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+
+    } catch (err: any) {
+      return rejectWithValue(
+        err.response?.data?.message || "Failed to change password"
+      );
+    }
+  }
+);
+
 export const register = createAsyncThunk(
   "auth/register",
   (payload: RegisterFormValues, { rejectWithValue }) => {
@@ -107,6 +136,23 @@ const authSlice = createSlice({
       state.isLoading = true;
       state.isSuccess = false;
     });
+
+    // change password
+builder.addCase(changePassword.pending, (state) => {
+  state.isLoading = true;
+  state.isSuccess = false;
+});
+
+builder.addCase(changePassword.fulfilled, (state) => {
+  state.isLoading = false;
+  state.isSuccess = true;
+});
+
+builder.addCase(changePassword.rejected, (state, action) => {
+  state.isLoading = false;
+  state.isSuccess = false;
+  state.ErrorMessage = action.payload as string;
+});
   },
 });
 
