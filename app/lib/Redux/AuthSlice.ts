@@ -5,7 +5,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState: {
-  userToken: null | string;
+  userToken: string | null;
   userData: any;
   ErrorMessage: string | null;
   isLoading: boolean;

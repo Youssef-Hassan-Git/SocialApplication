@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import logo from "../../assets/logo.png";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearToken } from "@/app/lib/Redux/AuthSlice";
+import { clearToken, setToken } from "@/app/lib/Redux/AuthSlice";
 import { RootState } from "@/app/lib/Redux/ReduxStore";
 export default function Navbar() {
   const pathname = usePathname();
@@ -18,10 +18,18 @@ export default function Navbar() {
   const logOut = () => {
     dispatch(clearToken());
     router.replace("/login");
+    localStorage.removeItem("userToken");
   };
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    useEffect(() => {
+      setIsMounted(true);
+
+      const token = localStorage.getItem("userToken");
+
+      if (token) {
+        dispatch(setToken(token));
+      }
+
+    }, []);
 
   return (
     <nav className="bg-blue-400  fixed w-full z-20 top-0 inset-s-0 border-b border-default">
