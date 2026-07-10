@@ -5,23 +5,21 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import logo from "../../assets/logo.png";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearToken } from "@/app/lib/Redux/AuthSlice";
+import { RootState } from "@/app/lib/Redux/ReduxStore";
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  const token = useSelector((state: RootState) => state.authSlice.userToken);
   const logOut = () => {
     dispatch(clearToken());
     router.replace("/login");
+    
   };
 
-  const [token, setToken] = useState<string | null>(null);
-
-  useEffect(() => {
-    setToken(localStorage.getItem("userToken"));
-  }, []);
   return (
     <nav className="bg-blue-400  fixed w-full z-20 top-0 inset-s-0 border-b border-default">
       <div className="max-w-7xl  flex flex-wrap items-center justify-between mx-auto p-4">
