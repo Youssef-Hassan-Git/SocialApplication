@@ -14,11 +14,14 @@ export default function Navbar() {
   const router = useRouter();
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.authSlice.userToken);
+  const [isMounted, setIsMounted] = useState(false);
   const logOut = () => {
     dispatch(clearToken());
     router.replace("/login");
-    
   };
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <nav className="bg-blue-400  fixed w-full z-20 top-0 inset-s-0 border-b border-default">
@@ -107,6 +110,8 @@ export default function Navbar() {
               </Link>
             </li>
 
+            {isMounted&& (<>
+            
             {!token && (
               <>
                 <li>
@@ -149,6 +154,7 @@ export default function Navbar() {
                 </li>
               </>
             )}
+            </>)}
           </ul>
         </div>
       </div>
