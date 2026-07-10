@@ -13,7 +13,7 @@ export default function AuthRefresh({children}:AuthRefreshProps ) {
         if(token){
             dispatch(setToken(token))
         }
-    },[])
+    },[dispatch])
     return (
     <div>
       {children}
